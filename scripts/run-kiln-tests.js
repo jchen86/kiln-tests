@@ -27,6 +27,8 @@ async function main() {
 
 async function deployAndCall() {
   const contract = await deployContract();
+  await contract.deployed()
+
   for await (const i of callContractTenTimes(contract)) {
     console.log(`Call transaction ${i} succeeded.`);
   }
@@ -39,9 +41,8 @@ async function deployContract() {
 
   const TutorialContract = await ethers.getContractFactory("Tutorial");
   const contract = await TutorialContract.deploy();
-  await contract.deployed()
 
-  console.log("Contract deployed. Address:", contract.address);
+  console.log("Contract Address:", contract.address);
 
   return contract
 }
